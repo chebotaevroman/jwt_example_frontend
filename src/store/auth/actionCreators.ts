@@ -1,7 +1,8 @@
 import { Dispatch } from "@reduxjs/toolkit"
 import api from "../../api"
 import { ILoginRequest } from "../../api/auth/types"
-import { loginStart, loginSucess, loginFailure } from "./authReducer"
+import { loginStart, loginSucess, loginFailure, logoutSuccess } from "./authReducer"
+import { history } from '../../utils/history'
 
 export const loginUser =
   (data: ILoginRequest) =>
@@ -20,3 +21,17 @@ export const loginUser =
         dispatch(loginFailure(e.message))
       }
     }
+
+export const logoutUser =
+  () =>
+  async (dispatch: Dispatch): Promise<void> => {
+      try {
+        await api.auth.logout()
+
+        dispatch(logoutSuccess())
+
+        history.push('/')
+      } catch (e) {
+          console.error(e)
+      }
+  }

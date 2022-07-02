@@ -1,4 +1,4 @@
-const Enpoints = {
+const Endpoints = {
   AUTH: {
     LOGIN: '/login',
     REFRESH: '/refresh',
@@ -7,4 +7,4 @@ const Enpoints = {
   }
 }
 
-export default Enpoints
+export default Endpoints

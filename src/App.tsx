@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import {
   BrowserRouter as Router,
@@ -9,12 +9,19 @@ import {
 import Header from "./components/Header";
 import Dashboard from "./pages/Dashboard";
 import Main from "./pages/Main";
-import { IRootState } from "./store";
+import { IRootState, useAppDispatch } from "./store";
+import { getProfile } from "./store/auth/actionCreators";
 
 function App() {
   const isLoggedIn = useSelector(
     (state: IRootState) => !!state.auth.authData.accessToken
   );
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   return (
     <Router>
